@@ -4,7 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/conFusion';
+var passport = require('passport');
+var authenticate = require('./authenticate');
+var config = require('./config');
+
+const url = config.mongoUrl;
 const connect = mongoose.connect(url);
 
 var indexRouter = require('./routes/index');
@@ -25,9 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
