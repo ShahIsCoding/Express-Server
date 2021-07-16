@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const moongose = require('mongoose');
-
+const authenticate = require('../authenticate');
 const Leaders = require('../models/leaders');
 
 const leaderRouter = express.Router();
