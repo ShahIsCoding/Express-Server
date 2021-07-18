@@ -46,10 +46,6 @@ var dishSchema = new Schema({
         type:Boolean,
         default:false
     },    
-    "designation":{
-        type:String,
-        required:true
-    },
     "comments":[commentSchema]
 },{
     "timestamps":true
